@@ -8,7 +8,7 @@ Shido Tamaki, October 2026. Not peer reviewed.
 > The counterexample was found by Claude, an AI model made by Anthropic (Claude Opus 5.5), in a survey of open problems that Shido Tamaki initiated and directed in October 2026. The proof and the first computer checks were also written by Claude Opus 5.5. An independent review of the proof, with a separate re-implementation of all computations (the file [`verify.py`](verify.py)) and the Lean file [`Kourovka2086.lean`](Kourovka2086.lean), was done by another Claude model (Claude Fable 5.1). This write-up was also drafted by Claude.
 > Only part of the argument is formally verified in Lean (see Section 5); the rest rests on the hand proof below and on computer checks (linear algebra over $`\mathbb{F}_8`$, and a brute force over all elements of $`G`$), done by two separately written programs.
 >
-> **TODO (Shido): what I checked myself, in my own words.**
+> **What I checked myself (Shido Tamaki).** I ran [`verify.py`](verify.py) on my own computer and confirmed that all checks pass with the results stated here. I also checked that the statement of the problem in Section 1 agrees with the Kourovka Notebook. I take responsibility for the mathematical claims made in this repository.
 
 ## 1. The problem
 
