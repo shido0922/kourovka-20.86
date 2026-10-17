@@ -1,0 +1,118 @@
+
+==============================================================================
+A. GF(8) from scratch
+==============================================================================
+modulus: t^3 + 1 t^0 + 1 t^2  (coefficients of 1, t, t^2: [1, 0, 1])
+field axioms (exhaustive), x^7 = 1 for all x != 0: OK
+omega = 2 (code), powers: [1, 2, 4, 5, 7, 3, 6, 1]
+
+==============================================================================
+B. E = <x, y> <= GL_7(F_8)
+==============================================================================
+|E| = 343 (expected 343)
+element orders in E: {1: 1, 7: 342}
+Z(E) = the 7 scalar matrices w^c I  : OK
+set of commutators = Z(E)  (so E' = Z(E), E/Z(E) abelian of order 49, exponent 7): OK
+dim span_F(E) in M_7(F_8) = 49 (expected 49)
+rank of stacked (a - I), a in E: 7 -> C_V(E) = 0 : True
+[21.5 s]
+
+==============================================================================
+C. kernels of N_a and of (a - 1), |G_7| by the fibre formula, Lemma 3 cross-check
+==============================================================================
+tally (class, dim ker N_a, dim ker(a-I)) -> count:
+    ('central', 7, 0) -> 6
+    ('identity', 0, 7) -> 1
+    ('noncentral', 6, 1) -> 336
+|G_7| = sum_a 8^(dim ker N_a) = 100663297
+Knapp-Schmid Lemma 3: f_7 = (1/343) sum_a s_7/psi(a) = 293479   (= |G_7|/343 : True )
+f-hat = s / (prod psi)^(1/343) = 262144.000000  (s^(6/7) = 262144)
+[21.6 s]
+
+==============================================================================
+D. brute force over all 343 * 2^21 elements (group law only)
+==============================================================================
+   ... 49 / 343 elements done [57.1 s]
+   ... 98 / 343 elements done [97.6 s]
+   ... 147 / 343 elements done [126.9 s]
+   ... 196 / 343 elements done [152.7 s]
+   ... 245 / 343 elements done [185.5 s]
+   ... 294 / 343 elements done [244.5 s]
+   ... 343 / 343 elements done [319.2 s]
+brute force: (class, #v with (v,a)^7 = 1) -> #a :
+    ('central', 2097152) -> 6
+    ('identity', 1) -> 1
+    ('noncentral', 262144) -> 336
+brute force |G_7| = 100663297
+formula (v,a)^7 = (N_a v, 1) agrees with the group law for all 7.2e8 elements: True
+distinct conjugates E_0^{(v,1)} (via the pair of elements with E-part x, y): 2097152 = 2^21 : True
+#v with xv = v and yv = v : 1 (expected 1)
+[323.5 s]
+
+==============================================================================
+E. exact integers
+==============================================================================
+s_7 = 2097152 = 1 + 7*299593,  k = 299593
+|G_7| = 100663297 = 343 * 293479,  f_7 = 293479 = 1 + 6*48913,  l = 48913
+l^7 = 669838495472739697494750319599217
+k^6 = 723086029984186130422176990254449
+l^7 < k^6 : True   ratio = 0.92636072
+Gheri ratio f^7 / s^6 = 2.204244  (>= 1 : True)
+identity  l^7/k^6 = (f^7/s^6)(1-1/f)^7(1-1/s)^-6 7^6/6^7 : True
+2^42 = 4398046511104 < 0.93*7^15 = 4415232204247 : True
+PSL_3(7): |G| = 1876896, s_7 = 456, k = 65, |G_7| = 7^6 (Steinberg), f = 343, l = 57, l^7 >= k^6: True
+
+==============================================================================
+F. small analogues of the family
+==============================================================================
+  (p,Q)=(3,4): |G| = 1728, element orders: {1: 1, 2: 63, 3: 512, 6: 1152}
+  s_p (distinct conjugates of E_0) = 64, |G_p| (orders a power of p) = 513, |union of Sylows| = 513
+  family formulas: s_p = 64, |G_p| = 513  -> match: True
+  [323.6 s]
+  (p,Q)=(3,7): |G| = 9261, element orders: {1: 1, 3: 1862, 7: 342, 21: 7056}
+  s_p (distinct conjugates of E_0) = 343, |G_p| (orders a power of p) = 1863, |union of Sylows| = 1863
+  family formulas: s_p = 343, |G_p| = 1863  -> match: True
+  [324.4 s]
+  (p,Q)=(5,11): brute |G_p| = 2401125 (formula 2401125), s_p = 161051 (formula 161051)
+  [366.5 s]
+
+==============================================================================
+G. family table, exact integers, all primes p <= 260
+==============================================================================
+primes p <= 260 for which some Q = mp+1 (prime power) gives l^p < k^(p-1):
+   p =   7 : Q=8 (m=1) ratio=0.926361 gheri=2.204
+   p =  23 : Q=47 (m=2) ratio=0.757894 gheri=6.271
+   p =  29 : Q=59 (m=2) ratio=0.617979 gheri=6.478
+   p =  31 : Q=32 (m=1) ratio=0.230947 gheri=2.591
+   p =  41 : Q=83 (m=2) ratio=0.451342 gheri=6.724
+   p =  53 : Q=107 (m=2) ratio=0.355486 gheri=6.865
+   p =  83 : Q=167 (m=2) ratio=0.232199 gheri=7.047
+   p =  89 : Q=179 (m=2) ratio=0.217138 gheri=7.069
+   p = 113 : Q=227 (m=2) ratio=0.172407 gheri=7.135
+   p = 127 : Q=128 (m=1) ratio=0.057728 gheri=2.686
+   p = 131 : Q=263 (m=2) ratio=0.149334 gheri=7.169
+   p = 139 : Q=557 (m=4) ratio=0.984760 gheri=50.174
+   p = 163 : Q=653 (m=4) ratio=0.849632 gheri=50.791
+   p = 173 : Q=347 (m=2) ratio=0.113799 gheri=7.222
+   p = 179 : Q=359 (m=2) ratio=0.110057 gheri=7.227
+   p = 191 : Q=383 (m=2) ratio=0.103267 gheri=7.237
+   p = 193 : Q=773 (m=4) ratio=0.725199 gheri=51.356
+   p = 199 : Q=797 (m=4) ratio=0.704558 gheri=51.449
+   p = 233 : Q=467 (m=2) ratio=0.084928 gheri=7.264
+   p = 239 : Q=479 (m=2) ratio=0.082827 gheri=7.267
+   p = 251 : Q=503 (m=2) ratio=0.078921 gheri=7.273
+matches the list in README: True
+p = 3: lower bound at Q = 4 is 1.5432 > 1 -> never breaks
+p = 5: lower bound at Q = 11 is 2.0972 > 1 -> never breaks
+Mersenne p = 7, Q = 8: l^p < k^(p-1) : True
+Mersenne p = 31, Q = 32: l^p < k^(p-1) : True
+Mersenne p = 127, Q = 128: l^p < k^(p-1) : True
+Mersenne p = 8191, Q = 8192: log(l^p / k^(p-1)) = -7.011 (< 0 : True)
+all Q = 2p+1 prime-power cases with 23 <= p <= 293 break: OK
+[370.9 s]
+
+==============================================================================
+SUMMARY
+==============================================================================
+All assertions passed.  k = 299593, l = 48913, l^7 < k^6 (ratio 0.92636), |G_7| = 100663297, s_7 = 2^21.
+total time [370.9 s]
